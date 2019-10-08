@@ -11,9 +11,9 @@
     <div class="wrapper">
       <div class="header">Test JSON page</div>
       <!-- <button class="button" onclick="loadData()">Load Some JSON</button> -->
-      <button class="button" onclick="console.log('You haven\'t written a function yet!');">Click me to replace list entries</button>
-      <div class="content">
-        <ul class="instructions">
+      <button class="button" onclick="myFunction()">Click me to replace list entries</button>
+      <div class="content" id="code">
+        <ul class="instructions" id="code">
           <li>Delete and re-clone the class repository</li>
           <li>Open <span class="code">lab_5_json.html</span> in your browser</li>
           <li>Open your developer tools and look at the logged data</li>
@@ -278,6 +278,21 @@
       { "name": "Zambia", "code": "ZM" },
       { "name": "Zimbabwe", "code": "ZW" }
     ]
+    
+    sessionStorage.setItem("countries", JSON.stringify(countries));
+    const str = sessionStorage.getItem("countries");
+    const json = JSON.parse(str);
+
+    function myFunction(){
+      var len = countries.length;
+      var result;
+      for (i = 0, len = countries.length; i < len; i++ ){
+            result += "<li>" + countries[i].code + "</li>";
+      }
+      document.getElementById("code").innerHTML = result;
+
+    }    
+
     console.log("List of countries in the world", countries);
   </script>
 </body>
