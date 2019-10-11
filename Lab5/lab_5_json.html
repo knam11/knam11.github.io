@@ -278,20 +278,28 @@
       { "name": "Zambia", "code": "ZM" },
       { "name": "Zimbabwe", "code": "ZW" }
     ]
-    
-    sessionStorage.setItem("countries", JSON.stringify(countries));
-    const str = sessionStorage.getItem("countries");
-    const json = JSON.parse(str);
-
+       
     function myFunction(){
-      var len = countries.length;
-      var result;
-      for (i = 0, len = countries.length; i < len; i++ ){
-            result += "<li>" + countries[i].code + "</li>";
-      }
-      document.getElementById("code").innerHTML = result;
+      sessionStorage.setItem("countries", JSON.stringify(countries));
+      const str = sessionStorage.getItem("countries");
+      const json = JSON.parse(str);
 
-    }    
+      let arr = document.getElementsByClassName("instructions")[0];
+      arr.style.listStyle = "decimal";
+      arr.innerHTML = "";
+
+      let holder = JSON.parse(JSON.stringify(json));
+
+      for(let i = 0; i < 50; i++){
+            let rand = Math.floor(Math.random()*holder.length);
+            let node = document.createElement("LI");
+            let cName = document.createTextNode(holder[rand].name)
+            holder.splice(rand, 1);
+            node.appendChild(cName);
+            arr.appendChild(node);
+      }
+
+    }
 
     console.log("List of countries in the world", countries);
   </script>
