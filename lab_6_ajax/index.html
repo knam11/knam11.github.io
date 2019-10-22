@@ -20,8 +20,27 @@
       fetch('ajax_sample.json')
         .then(res => res.json())
         .then(res => res.map(c => c.name))
-        .then(code => document.querySelector(".content").innerText = name);
+        .then(names =>{
+          loocountries(names)
+      });  
     }
+
+    function loopCountries(){
+      let content = document.querySelector(".content");
+
+      let array = document.querySelector(".countryList");
+      array.innerHTML = "";
+
+      for(let i = 0; i < 15; i++){
+            let rand = Math.floor(Math.random()*holder.length);
+            let node = document.createElement("LI");
+            let cName = document.createTextNode(holder[rand].name)
+            holder.splice(rand, 1);
+            node.appendChild(cName);
+            arr.appendChild(node);
+      }
+    }
+
   </script>
 </body>
 
