@@ -37,7 +37,7 @@
       for(let i = 0; i < 15; i++){
             let rand = Math.floor(Math.random()*holder.length);
             let node = document.createElement("LI");
-            let cName = document.createTextNode(holder[rand].name)
+            let cName = document.createTextNode(holder[rand].name);
             holder.splice(rand, 1);
             node.appendChild(cName);
             arr.appendChild(node);
