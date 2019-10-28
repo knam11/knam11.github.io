@@ -11,16 +11,47 @@
     <div class="wrapper">
       <div class="header">UMD Bus Routes</div>
       <button class="button" onclick="loadData()">Load Some JSON</button>
-      <div class="content"></div>
+      <div class="content">
+        <ol class = "Bus Routes"></ol>
+      </div>
       <div class="footer"></div>
     </div>
   </div>
   <script>
     function loadData() {
-      fetch('ajax_sample.json')
+      fetch('https://api.umd.io/v0/bus/routes')
         .then(res => res.json())
-        .then(data => document.querySelector(".content").innerText = data);
+        .then(res => res.map(bus => "Route name: " + bus.title + ", " + "Route: " + bus.route_id))
+        .then(res => addBus(res))
+        .then(res => updateHead(res))
+        .then(bus => busRoute(bus));
     }
+
+    function addBus(busArr){
+      let content = document.querySelector(".content");
+
+      let rList = document.querySelector(".routeList");
+      rList.innerHTML = "";
+
+      for(i = 0; i < busArr.length; i++){
+        let rNode = document.createElement("LI");
+        let rName = document.createTextNode(busArr[i]);
+        rNode.appendChild(rName);
+        rList.appendChild(rNode);
+      }
+
+      return busArr;
+
+    }
+
+    function updateHead(busArr){
+      let header = document.querySelector(".header");
+      let route = busArr.find(listItem => listItem === "Route Name: Campus Connector, Route ID: 105")
+      header.innerText = "UMD Bus Routes";
+      header.innerText = header.innerText + " " + route;
+      return busArr;
+    }
+
   </script>
 </body>
 
