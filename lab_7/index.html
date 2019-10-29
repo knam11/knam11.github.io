@@ -12,42 +12,50 @@
       <div class="header">UMD Bus Routes</div>
       <button class="button" onclick="loadData()">Load Some JSON</button>
       <div class="content">
-        <ol class = "routeList"></ol>
+        <ol class="routeList"></ol>
       </div>
       <div class="footer"></div>
     </div>
   </div>
   <script>
+
     function loadData() {
       fetch('https://api.umd.io/v0/bus/routes')
         .then(res => res.json())
-        .then(res => {
+        .then(res => { 
           console.log(res)
           return res
-        }) 
+        })
         .then(res => textFill(res))
-        .then(res => res.map(bus => "Route name: " + bus.title + ", " + "Route: " + bus.route_id))
-        .then(res => addBus(res))
-        .then(res => updateHead(res))
-       
+        .then(res => res.map(bus => "Route Name: " + bus.title + ", Route ID: " + bus.route_id))
+        .then(res => addToList(res))
         .then(res => console.log(res));
     }
 
-    function addBus(busArr){
-      let content = document.querySelector(".content");
+    function textFill(busRoutes){
+      for(i = 0; i < busRoutes.length; i++){
+        let rID = busRoutes[i].route_id;
+        let bName = busRoutes[i].title;
+        bName = bName.replace(rID, "");
+        bName = bName.trim();
+        busRoutes[i].title = bName;
+      }
+      return busRoutes;
+    }
 
-      let rList = document.querySelector(".routeList");
-      rList.innerHTML = "";
+    function addToList(busArr){
+      let contentHTML = document.querySelector(".content");
+
+      let list = document.querySelector(".routeList");
+      list.innerHTML = "";
 
       for(i = 0; i < busArr.length; i++){
         let rNode = document.createElement("LI");
         let rName = document.createTextNode(busArr[i]);
         rNode.appendChild(rName);
-        rList.appendChild(rNode);
+        list.appendChild(rNode);
       }
-
       return busArr;
-
     }
 
     function updateHead(busArr){
@@ -57,20 +65,6 @@
       name.innerText = name.innerText + " " + route;
       return busArr;
     }
-
-    function textFill(busRoutes){
-      for(i = 0; i < busRoutes.length; i++){
-        let rID = busRoutes[i].route_id;
-        let bName = busRoutes[i].title;
-        bName = bName.replace(rID, "");
-        // removes the extra white space left over
-        bName = bName.trim();
-        busRoutes[i].title = bName;
-      }
-      return busRoutes;
-    }
-
-
   </script>
 </body>
 
