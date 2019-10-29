@@ -24,11 +24,12 @@
         .then(res => {
           console.log(res)
           return res
-        })
+        }) 
+        .then(res => textFill(res))
         .then(res => res.map(bus => "Route name: " + bus.title + ", " + "Route: " + bus.route_id))
         .then(res => addBus(res))
         .then(res => updateHead(res))
-        .then(res => textFill(res))
+       
         .then(res => console.log(res));
     }
 
@@ -57,16 +58,18 @@
       return busArr;
     }
 
-    function textFill(busRoute){
-      for(i = 0; i < busRoute.length; i++){
-        let rID = busRoute[i].route_id;
-        let bName = busRoute[i].title;
+    function seperateId(busRoutes){
+      for(i = 0; i < busRoutes.length; i++){
+        let rID = busRoutes[i].route_id;
+        let bName = busRoutes[i].title;
         bName = bName.replace(rID, "");
+        // removes the extra white space left over
         bName = bName.trim();
-        busRoute[i].title = bName;
+        busRoutes[i].title = bName;
       }
-      return busRoute;
+      return busRoutesDict;
     }
+
 
   </script>
 </body>
