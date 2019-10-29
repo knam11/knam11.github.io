@@ -25,12 +25,10 @@
           console.log(res)
           return res
         })
-        .then(res => textFill(res))
         .then(res => res.map(bus => "Route name: " + bus.title + ", " + "Route: " + bus.route_id))
-
         .then(res => addBus(res))
         .then(res => updateHead(res))
-        
+        .then(res => textFill(res))
         .then(res => console.log(res));
     }
 
@@ -61,8 +59,8 @@
 
     function textFill(busRoute){
       for(i = 0; i < busRoute.length; i++){
-        let rID = busRoute.route_id;
-        let bName = busRoute.title;
+        let rID = busRoute[i].route_id;
+        let bName = busRoute[i].title;
         bName = bName.replace(rID, "");
         bName = bName.trim();
         busRoute[i].title = bName;
