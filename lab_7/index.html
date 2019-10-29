@@ -50,23 +50,23 @@
     }
 
     function updateHead(busArr){
-      let header = document.querySelector(".header");
+      let name = document.querySelector(".header");
       let route = busArr.find(listItem => listItem === "Route Name: Campus Connector, Route ID: 105")
-      header.innerText = "UMD Bus Routes";
-      header.innerText = header.innerText + " " + route;
+      name.innerText = "UMD Bus Routes";
+      name.innerText = name.innerText + " " + route;
       return busArr;
     }
 
-    // function textFill(busRoute){
-    //   for(i = 0; i < busRoute.length; i++){
-    //     let rID = busRoute[i].route_id;
-    //     let bName = busRoute[i].title;
-    //     bName = bName.replace(rID, "");
-    //     bName = bName.trim();
-    //     busRoute[i].title = bName;
-    //   }
-    //   return busRoute;
-    // }
+    function textFill(busRoute){
+      for(i = 0; i < busRoute.length; i++){
+        let rID = busRoute[i].route_id;
+        let bName = busRoute[i].title;
+        bName = bName.replace(rID, "");
+        bName = bName.trim();
+        busRoute[i].title = bName;
+      }
+      return busRoute;
+    }
 
   </script>
 </body>
