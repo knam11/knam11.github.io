@@ -25,10 +25,12 @@
           console.log(res)
           return res
         })
+        .then(res => textFill(res))
         .then(res => res.map(bus => "Route name: " + bus.title + ", " + "Route: " + bus.route_id))
+
         .then(res => addBus(res))
         .then(res => updateHead(res))
-        .then(res => textFill(res))
+        
         .then(res => console.log(res));
     }
 
