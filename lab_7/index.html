@@ -29,7 +29,7 @@
         .then(res => textFill(res))
         .then(res => res.map(bus => "Route Name: " + bus.title + ", Route ID: " + bus.route_id))
         .then(res => addToList(res))
-        .then(res => updateHead(res)
+        .then(res => updateHead(res))
         .then(res => console.log(res));
     }
 
