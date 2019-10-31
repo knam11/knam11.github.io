@@ -59,10 +59,10 @@
     }
 
     function updateHead(busArr){
-      let title = document.querySelector(".header");
+      let name = document.querySelector(".header");
       let route = busArr.find(listItem => listItem === "Route Name: Purple, Route ID: 116")
-      title.innerText = "UMD Bus Routes";
-      title.innerText = title.innerText + " " + route;
+      name.innerText = "UMD Bus Routes";
+      name.innerText = name.innerText + " " + route;
       return busArr;
     }
   </script>
